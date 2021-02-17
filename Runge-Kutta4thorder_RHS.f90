@@ -1,4 +1,28 @@
-MODULE RHS
+!MODULE RHS
+!  INTERFACE
+!     SUBROUTINE RHS(N,time,H,INFO)
+!       IMPLICIT NONE
+!       INTEGER,                    INTENT(IN)    :: N
+!       DOUBLE PRECISION,           INTENT(IN)    :: time
+!       COMPLEX*16, DIMENSION(N,N), INTENT(OUT)   :: H
+!       INTEGER,                    INTENT(INOUT) :: INFO
+!     END SUBROUTINE RHS
+!  END INTERFACE
+!END MODULE RHS
+
+SUBROUTINE RKFOURTHORDER(RHS,N,y,t,dt,INFO)
+  
+!  USE RHS
+  IMPLICIT NONE
+  INTEGER,                          INTENT(IN)    :: N
+  COMPLEX*16,       DIMENSION(N),   INTENT(INOUT) :: y
+  DOUBLE PRECISION,                 INTENT(INOUT) :: t
+  DOUBLE PRECISION,                 INTENT(IN)    :: dt
+  INTEGER,                          INTENT(INOUT) :: INFO
+  !DOUBLE PRECISION, DIMENSION(:), INTENT(IN)    :: beta_ijkl
+  !DOUBLE PRECISION, DIMENSION(:), INTENT(IN)    :: beta_ijkl_map
+  
+ 
   INTERFACE
      SUBROUTINE RHS(N,time,H,INFO)
        IMPLICIT NONE
@@ -8,19 +32,6 @@ MODULE RHS
        INTEGER,                    INTENT(INOUT) :: INFO
      END SUBROUTINE RHS
   END INTERFACE
-END MODULE RHS
-
-SUBROUTINE RKFOURTHORDER(RHS,N,y,t,dt,INFO)
-  
-  USE RHS
-  IMPLICIT NONE
-  INTEGER,                          INTENT(IN)    :: N
-  COMPLEX*16,       DIMENSION(N),   INTENT(INOUT) :: y
-  DOUBLE PRECISION,                 INTENT(INOUT) :: t
-  DOUBLE PRECISION,                 INTENT(IN)    :: dt
-  INTEGER,                          INTENT(INOUT) :: INFO
-  !DOUBLE PRECISION, DIMENSION(:), INTENT(IN)    :: beta_ijkl
-  !DOUBLE PRECISION, DIMENSION(:), INTENT(IN)    :: beta_ijkl_map
   
   COMPLEX*16, DIMENSION(:), ALLOCATABLE :: K1,K2,K3,K4,y_aux
   COMPLEX*16, DIMENSION(N,N) :: H
@@ -35,7 +46,7 @@ SUBROUTINE RKFOURTHORDER(RHS,N,y,t,dt,INFO)
      ALLOCATE(K4(SIZE(Y)))
      ALLOCATE(y_aux(SIZE(Y)))
      
-     !write(*,*) "k1"
+     !write(*,*) "k1",N
      !K1 = f(t,y,beta_ijkl,beta_ijkl_map) 
      CALL RHS(N,t,H,INFO)! TIGHT_BINDING_HAMILTONIAN(N,t,H,INFO)
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,Y)

@@ -34,13 +34,6 @@
 
 
 PROGRAM TIGH_BINDING
-!  USE ATOMIC_PROPERTIES
-!  USE TYPES
-  USE SUBINTERFACE
-  USE SUBINTERFACE_LAPACK
-!  USE FLOQUETINITINTERFACE
-!  USE ARRAYS 
-
 
   IMPLICIT NONE
   INTEGER INFO, N_BODIES,N_SITES,N_T,D_BARE,I_,J_
@@ -52,6 +45,7 @@ PROGRAM TIGH_BINDING
   DOUBLE PRECISION, DIMENSION(:), ALLOCATABLE :: E_BARE
   complex*16, dimension(32) :: test
   INFO     = 0
+
   N_BODIES = 1     
   N_SITES  = 32
   D_BARE   = D_H(N_SITES,N_BODIES,'B')  ! D_H EVALUATES THE NUMBER OF STATES  
@@ -61,10 +55,10 @@ PROGRAM TIGH_BINDING
 
   H = DCMPLX(0.0,0.0)
 
-  N_T = 8*1024
-  DT  = 1.0/N_T
-  TIME = 0.0
-  test = 0
+  N_T  = 8*1024  ! number of time steps
+  DT   = 1.0/N_T ! time step
+  TIME = 0.0     ! initial time
+  test = 0           
   DO I_=1,N_SITES
      test(I_) = exp(-1.0*(i_-16)**2/16.0)
   END DO
@@ -85,7 +79,7 @@ PROGRAM TIGH_BINDING
   END DO
   !WRITE(*,*)
   !WRITE(*,*)
-  DO i_=1,N_T
+  DO i_=1,16!N_T
      TIME = i_*1.0/N_T
      !CALL TIGHT_BINDING_HAMILTONIAN(SIZE(H,1),TIME,H,INFO)   
      !CALL LAPACK_FULLEIGENVALUES(H,D_BARE,E_BARE,INFO)
@@ -100,7 +94,8 @@ PROGRAM TIGH_BINDING
      !where |n> is the n-th lattice site. This is because:
      ! |e_i> = SUM_n H_BARE(n,i) |n>
      !CALL WRITE_MATRIX(real(H))
-     CALL RKFOURTHORDER(SIZE(E_BARE,1),PSI,TIME,DT,INFO)
+     CALL RKFOURTHORDER(TIGHT_BINDING_HAMILTONIAN,SIZE(E_BARE,1),PSI,TIME,DT,INFO)
+     !CALL RKFOURTHORDER(SIZE(E_BARE,1),PSI,TIME,DT,INFO)
      IF(MOD(I_,64).EQ.0) THEN
         DO J_=1,SIZE(E_BARE,1)
            WRITE(*,*) time,J_,REAL(PSI(J_)),AIMAG(PSI(J_))
