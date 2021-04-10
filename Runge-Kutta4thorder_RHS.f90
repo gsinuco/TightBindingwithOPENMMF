@@ -13,6 +13,7 @@
 SUBROUTINE RKFOURTHORDER(RHS,N,y,t,dt,INFO)
   
 !  USE RHS
+  USE PRINT_MATRIX
   IMPLICIT NONE
   INTEGER,                          INTENT(IN)    :: N
   COMPLEX*16,       DIMENSION(N),   INTENT(INOUT) :: y
@@ -24,11 +25,12 @@ SUBROUTINE RKFOURTHORDER(RHS,N,y,t,dt,INFO)
   
  
   INTERFACE
-     SUBROUTINE RHS(N,time,H,INFO)
+     SUBROUTINE RHS(N,time,Y,H,INFO)
        IMPLICIT NONE
        INTEGER,                    INTENT(IN)    :: N
        DOUBLE PRECISION,           INTENT(IN)    :: time
        COMPLEX*16, DIMENSION(N,N), INTENT(OUT)   :: H
+       COMPLEX*16, DIMENSION(N),   INTENT(IN)    :: Y
        INTEGER,                    INTENT(INOUT) :: INFO
      END SUBROUTINE RHS
   END INTERFACE
@@ -48,33 +50,38 @@ SUBROUTINE RKFOURTHORDER(RHS,N,y,t,dt,INFO)
      
      !write(*,*) "k1",N
      !K1 = f(t,y,beta_ijkl,beta_ijkl_map) 
-     CALL RHS(N,t,H,INFO)! TIGHT_BINDING_HAMILTONIAN(N,t,H,INFO)
+     CALL RHS(N,t,Y,H,INFO)! TIGHT_BINDING_HAMILTONIAN(N,t,H,INFO)
+!     CALL WRITE_MATRIX(REAL(H))
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,Y)
      K1 = Y_AUX !f(t,y)
      y_aux = y +K1*dt*0.5
      
      !write(*,*) "k2"
      !K2 = f(t+0.5*dt,y_aux,beta_ijkl,beta_ijkl_map)
-     CALL RHS(N,t+0.5*dt,H,INFO)!TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,H,INFO)
+     CALL RHS(N,t+0.5*dt,Y_AUX,H,INFO)!TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,H,INFO)
+!     CALL WRITE_MATRIX(REAL(H))
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,y_aux)
      K2 = y_aux!f(t+0.5*dt,y_aux)
      y_aux = y +K2*dt*0.5
      
      !write(*,*) "k3"
      !K3 = f(t+0.5*dt,y_aux,beta_ijkl,beta_ijkl_map)
-     CALL RHS(N,t+0.5*dt,H,INFO)!TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,H,INFO)
+     CALL RHS(N,t+0.5*dt,Y_AUX,H,INFO)!TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,H,INFO)
+!     CALL WRITE_MATRIX(REAL(H))
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,y_aux)
      K3 = y_aux!f(t+0.5*dt,y_aux)
      y_aux = y +K3*dt
      
      !write(*,*) "k4"
      !K4 = f(t+dt,y_aux,beta_ijkl,beta_ijkl_map)
-     CALL RHS(N,t+dt,H,INFO)!TIGHT_BINDING_HAMILTONIAN(N,t+dt,H,INFO)
+     CALL RHS(N,t+dt,Y_AUX,H,INFO)!TIGHT_BINDING_HAMILTONIAN(N,t+dt,H,INFO)
+!     CALL WRITE_MATRIX(REAL(H))
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,y_aux)
      K4 = y_aux!f(t+dt,y_aux)
      y = y + dt*(K1 + 2.0*K2 + 2.0*K3 + K4)/6.0
+     !WRITE(*,*) '#',dt*(K1 + 2.0*K2 + 2.0*K3 + K4)/6.0
      
-     t = t + dt;
+     !t = t + dt;
      !write(*,*) t,dt  
   ELSE
      WRITE(*,*) "INFO != 0"

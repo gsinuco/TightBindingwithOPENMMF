@@ -1,34 +1,28 @@
+SUBROUTINE TIGHT_BINDING_HAMILTONIAN(N,time,PSI,H,INFO)
 
-SUBROUTINE TIGHT_BINDING_HAMILTONIAN(N,time,H,INFO)
-  !USE ATOMIC_PROPERTIES
-  !USE TYPES
-!  USE SUBINTERFACE
-!  USE SUBINTERFACE_LAPACK
-  !USE FLOQUETINITINTERFACE
-  !USE ARRAYS 
-
-
+  USE K_J_MOD
+  USE PRINT_MATRIX
   IMPLICIT NONE
   INTEGER,                    INTENT(IN)    :: N
   DOUBLE PRECISION,           INTENT(IN)    :: time
   COMPLEX*16, DIMENSION(N,N), INTENT(OUT)   :: H
   INTEGER,                    INTENT(INOUT) :: INFO
+  COMPLEX*16,       DIMENSION(N),  INTENT(IN) :: PSI
   
 
-  !TYPE(MODE),       DIMENSION(:),   ALLOCATABLE :: FIELDS
-  !TYPE(ATOM)                                       ID
   INTEGER,          DIMENSION(:),   ALLOCATABLE :: MODES_NUM
   INTEGER                                          TOTAL_FREQUENCIES,D_BARE
   INTEGER                                          m,INDEX0,r
   DOUBLE PRECISION, DIMENSION(:),   ALLOCATABLE :: ENERGY,E_FLOQUET,E_BARE,MOMENTUM
   COMPLEX*16,       DIMENSION(:),   ALLOCATABLE :: PSI_K
-  COMPLEX*16,       DIMENSION(:,:), ALLOCATABLE :: H_J,H_U,U_F,H_BARE
+  COMPLEX*16,       DIMENSION(:,:), ALLOCATABLE :: H_J_1,H_J_2,H_J_3,H_U,U_F,H_BARE
   DOUBLE PRECISION, DIMENSION(:,:), ALLOCATABLE :: P_AVG
   INTEGER         , DIMENSION(:,:), ALLOCATABLE :: states_occ
   DOUBLE PRECISION                              :: T1,T2
 
   INTEGER index,N_BODIES,N_SITES,i_,M_
   DOUBLE PRECISION t,u,t_driv,omega,D_H
+
 
   !OPEN(UNIT=3,FILE="ManybodyHubbard_Bosons.dat",ACTION="WRITE")
   
@@ -37,20 +31,20 @@ SUBROUTINE TIGHT_BINDING_HAMILTONIAN(N,time,H,INFO)
      
      N_SITES  = N
      
-     
-     
      D_BARE = D_H(N_SITES,N_BODIES,'B')  ! D_H EVALUATES THE NUMBER OF STATES  
-     write(*,*) '# Number of lattice sites:         ', N_SITES
-     write(*,*) '# Number of particles:             ', N_BODIES
-     write(*,*) '# Number of states Bosonic states  ', D_BARE
-     write(*,*)
-     write(*,*)
+     !write(*,*) '# Number of lattice sites:         ', N_SITES
+     !write(*,*) '# Number of particles:             ', N_BODIES
+     !write(*,*) '# Number of states Bosonic states  ', D_BARE
+     !write(*,*)
+     !write(*,*)
      
      
          
      ALLOCATE(E_BARE(D_BARE))             ! STORE THE ENERGY SPECTRUM
      ALLOCATE(H_BARE(D_BARE,D_BARE))      ! STORE THE BARE HAMILTONIAN
-     ALLOCATE(H_J(D_BARE,D_BARE))         ! STORE THE TUNNENING MATRIX
+     ALLOCATE(H_J_1(D_BARE,D_BARE))         ! STORE THE TUNNENING MATRIX
+     ALLOCATE(H_J_2(D_BARE,D_BARE))         ! STORE THE TUNNENING MATRIX
+     ALLOCATE(H_J_3(D_BARE,D_BARE))         ! STORE THE TUNNENING MATRIX
      ALLOCATE(H_U(D_BARE,D_BARE))         ! STORES THE ONSITE INTERACTION
      ALLOCATE(MOMENTUM(D_BARE))           ! STORES THE MOMENTUM ASSOCIATED WITH AN EIGENENERGY
      ALLOCATE(PSI_K(D_BARE))              ! STORES THE MOMENTUM ASSOCIATED WITH AN EIGENENERGY
@@ -66,30 +60,39 @@ SUBROUTINE TIGHT_BINDING_HAMILTONIAN(N,time,H,INFO)
      
      
      !  ! EVALUATE THE TUNNELING TERM OF THE HAMILTONIAN
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     CALL Tunneling_B(D_BARE,N_SITES,N_BODIES,STATES_OCC,H_J,INFO)
-     !  CALL WRITE_MATRIX(abs(h_j))
+     H_J_1 = 0.0
+     CALL Tunneling_B(D_BARE,N_SITES,N_BODIES,STATES_OCC,H_J_1,INFO)
+
+     H_J_2 = 0.0
+     CALL Inhomogeneous_Tunneling_B(D_BARE,N_SITES,N_BODIES,STATES_OCC,H_J_2,INFO)
+
+     H_J_3 = 0.0
+     CALL Inhomogeneous_EnergyShift_B(D_BARE,N_SITES,N_BODIES,STATES_OCC,H_J_3,INFO)
+
      !  !! EVALUATE THE ON-SITE INTERACTION
-     
-     CALL Onsite_twobody_B(D_BARE,N_SITES,N_BODIES,STATES_OCC,H_U,INFO)
-     !  !CALL WRITE_MATRIX(abs(h_u))
+     !CALL Onsite_twobody_B(D_BARE,N_SITES,N_BODIES,STATES_OCC,H_U,INFO)
+     CALL Onsite_meanfield_B(D_BARE,PSI,H_U,INFO)
+!     CALL WRITE_MATRIX(abs(h_u))
      !
-     ! HUBBARD MODEL PARAMETERS
-     t      = 0.1 - 0.2*TIME**2
-     u      = 0.0
+     ! HUBBARD MODEL RENORMALISATION PARAMETER
+     t      = 1.0 - 2.0*TIME/10
+
+     ! ONSITE INTERACTION
+     u      = 0.005
      
-     write(*,*) '# Hubbard parameters (t,u):',t,u
+     !write(*,*) '# Hubbard parameters (t,u):',t,u
      !IF(TIME.EQ.0) H =  -t*H_J + u*H_U     
      !IF(TIME.GT.0) H =   t*H_J + u*H_U     
-     H =  -t*H_J + u*H_U     
+      
+     IF (TIME .LE. 0.01) THEN
+        H =  -1.0*(H_J_1 + 0.0*H_J_2) + H_J_3 + 0.0*u*H_U     
+     ELSE
+        H = 0.0
+     !   H = -t*H_J_1
+     !   write(*,*) t
+        H =  -t*(H_J_1 + 1.0*H_J_2) + 1.0*H_J_3 + 0.0*u*H_U     
+     END IF
+     
      
      ! EVALUATE THE SPECTRUM OF THE STATIC HAMILTONIAN
      !H_BARE = FIELDS(1)%V

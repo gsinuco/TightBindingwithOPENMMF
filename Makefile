@@ -35,6 +35,14 @@ MMFINC = ./include/
 all: ManybodyHubbard ManybodyHubbard_RHS #
 
 ManybodyHubbard: subset.f90 HilbertDimension.f90 main_MBH_Bosons.f90
+	$(GF) -c zvode/zgbfa.f
+	$(GF) -c zvode/zgbsl.f
+	$(GF) -c zvode/zgefa.f
+	$(GF) -c zvode/zgesl.f
+	$(GF) -c zvode/zgesl.f
+	$(GF) -c zvode/zvode.f
+	$(GF) -c zvode/zvode_call.f
+	$(GF) -c Modules.f90
 	$(GF) -c bvec.f90
 	$(GF) -c subset.f90
 	$(GF) -c HilbertDimension.f90
@@ -43,11 +51,19 @@ ManybodyHubbard: subset.f90 HilbertDimension.f90 main_MBH_Bosons.f90
 	$(GF) -c tight_binding_boson_Hamiltonian.f90 -I./include
 	$(GF) -c Runge-Kutta4thorder_SIMPLE.f90
 	$(GF) -c LapackEigenValues.f90
-	$(GF) -o ManybodyHubbard_Bosons  LapackEigenValues.o tight_binding_boson_Hamiltonian.o Runge-Kutta4thorder_SIMPLE.o fftw_1D.o bvec.o subset.o HilbertDimension.o HubbardHamiltonian.o main_MBH_Bosons.f90 -I/usr/include -I$(MMFINC) -L$(MMFLIB) $(GFFLAGS) -L$(MKLLIBS) -I$(MKLINC) $(MKLFLAGS)
+	$(GF) -o ManybodyHubbard_Bosons   zgbfa.o zgbsl.o zgefa.o zgesl.o zvode.o zvode_call.o Modules.o LapackEigenValues.o tight_binding_boson_Hamiltonian.o Runge-Kutta4thorder_SIMPLE.o fftw_1D.o bvec.o subset.o HilbertDimension.o HubbardHamiltonian.o main_MBH_Bosons.f90 -I/usr/include -I$(MMFINC) -L$(MMFLIB) $(GFFLAGS) -L$(MKLLIBS) -I$(MKLINC) $(MKLFLAGS) -lblas
 
 
 
 ManybodyHubbard_RHS: subset.f90 HilbertDimension.f90 main_MBH_Bosons.f90
+	$(GF) -c zvode/zgbfa.f
+	$(GF) -c zvode/zgbsl.f
+	$(GF) -c zvode/zgefa.f
+	$(GF) -c zvode/zgesl.f
+	$(GF) -c zvode/zgesl.f
+	$(GF) -c zvode/zvode.f
+	$(GF) -c zvode/zvode_call.f
+	$(GF) -c Modules.f90
 	$(GF) -c bvec.f90
 	$(GF) -c subset.f90
 	$(GF) -c HilbertDimension.f90
@@ -56,7 +72,7 @@ ManybodyHubbard_RHS: subset.f90 HilbertDimension.f90 main_MBH_Bosons.f90
 	$(GF) -c tight_binding_boson_Hamiltonian.f90 -I./include
 	$(GF) -c Runge-Kutta4thorder_RHS.f90
 	$(GF) -c LapackEigenValues.f90
-	$(GF) -o ManybodyHubbard_Bosons  LapackEigenValues.o tight_binding_boson_Hamiltonian.o Runge-Kutta4thorder_RHS.o fftw_1D.o bvec.o subset.o HilbertDimension.o HubbardHamiltonian.o main_MBH_Bosons.f90 -I/usr/include -I$(MMFINC) -L$(MMFLIB) $(GFFLAGS) -L$(MKLLIBS) -I$(MKLINC) $(MKLFLAGS)
+	$(GF) -o ManybodyHubbard_Bosons  zgbfa.o zgbsl.o zgefa.o zgesl.o zvode.o zvode_call.o  Modules.o LapackEigenValues.o tight_binding_boson_Hamiltonian.o Runge-Kutta4thorder_RHS.o fftw_1D.o bvec.o subset.o HilbertDimension.o HubbardHamiltonian.o main_MBH_Bosons.f90 -I/usr/include -I$(MMFINC) -L$(MMFLIB) $(GFFLAGS) -L$(MKLLIBS) -I$(MKLINC) $(MKLFLAGS)
 
 
 ############################

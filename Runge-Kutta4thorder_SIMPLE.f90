@@ -24,28 +24,28 @@ SUBROUTINE RKFOURTHORDER(N,y,t,dt,INFO)
      
      !write(*,*) "k1"
      !K1 = f(t,y,beta_ijkl,beta_ijkl_map) 
-     CALL TIGHT_BINDING_HAMILTONIAN(N,t,H,INFO)
+     CALL TIGHT_BINDING_HAMILTONIAN(N,t,Y,H,INFO)
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,Y)
      K1 = Y_AUX !f(t,y)
      y_aux = y +K1*dt*0.5
      
      !write(*,*) "k2"
      !K2 = f(t+0.5*dt,y_aux,beta_ijkl,beta_ijkl_map)
-     CALL TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,H,INFO)
+     CALL TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,y_aux,H,INFO)
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,y_aux)
      K2 = y_aux!f(t+0.5*dt,y_aux)
      y_aux = y +K2*dt*0.5
      
      !write(*,*) "k3"
      !K3 = f(t+0.5*dt,y_aux,beta_ijkl,beta_ijkl_map)
-     CALL TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,H,INFO)
+     CALL TIGHT_BINDING_HAMILTONIAN(N,t+0.5*dt,Y_aux,H,INFO)
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,y_aux)
      K3 = y_aux!f(t+0.5*dt,y_aux)
      y_aux = y +K3*dt
      
      !write(*,*) "k4"
      !K4 = f(t+dt,y_aux,beta_ijkl,beta_ijkl_map)
-     CALL TIGHT_BINDING_HAMILTONIAN(N,t+dt,H,INFO)
+     CALL TIGHT_BINDING_HAMILTONIAN(N,t+dt,Y_aux,H,INFO)
      y_aux = -DCMPLX(0.0,1.0)*MATMUL(H,y_aux)
      K4 = y_aux!f(t+dt,y_aux)
      y = y + dt*(K1 + 2.0*K2 + 2.0*K3 + K4)/6.0

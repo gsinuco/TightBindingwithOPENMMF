@@ -1,0 +1,422 @@
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):  0.10000000149011612        0.0000000000000000     
+   0.0000000000000000                1  -4.0074873147501514E-004   0.0000000000000000     
+   0.0000000000000000                2  -5.1535825240112329E-007   0.0000000000000000     
+   0.0000000000000000                3  -1.6569134762696336E-009   0.0000000000000000     
+   0.0000000000000000                4  -1.0655054653015957E-011   0.0000000000000000     
+   0.0000000000000000                5  -1.1658249015210646E-013   0.0000000000000000     
+   0.0000000000000000                6  -1.9799468059934298E-015   0.0000000000000000     
+   0.0000000000000000                7  -5.1512916062812801E-017   0.0000000000000000     
+   0.0000000000000000                8  -9.1087819988734006E-016   0.0000000000000000     
+   0.0000000000000000                9  -2.1409713946006578E-014   0.0000000000000000     
+   0.0000000000000000               10  -4.0499169309428538E-013   0.0000000000000000     
+   0.0000000000000000               11  -6.2187608744894261E-012   0.0000000000000000     
+   0.0000000000000000               12  -7.8941659767236768E-011   0.0000000000000000     
+   0.0000000000000000               13  -8.4147964084419802E-010   0.0000000000000000     
+   0.0000000000000000               14  -7.6309188316250798E-009   0.0000000000000000     
+   0.0000000000000000               15  -5.9517047754740755E-008   0.0000000000000000     
+   0.0000000000000000               16  -4.0292035379518333E-007   0.0000000000000000     
+   0.0000000000000000               17  -2.3859415636056370E-006   0.0000000000000000     
+   0.0000000000000000               18  -1.2438486653180331E-005   0.0000000000000000     
+   0.0000000000000000               19  -5.7393564378421998E-005   0.0000000000000000     
+   0.0000000000000000               20  -2.3540954852520847E-004   0.0000000000000000     
+   0.0000000000000000               21  -8.6120166175501799E-004   0.0000000000000000     
+   0.0000000000000000               22  -2.8166878018626861E-003   0.0000000000000000     
+   0.0000000000000000               23  -8.2473696656713003E-003   0.0000000000000000     
+   0.0000000000000000               24  -2.1623670338332981E-002   0.0000000000000000     
+   0.0000000000000000               25  -5.0708648620845669E-002   0.0000000000000000     
+   0.0000000000000000               26 -0.10604993423694073        0.0000000000000000     
+   0.0000000000000000               27 -0.19673483215717577        0.0000000000000000     
+   0.0000000000000000               28 -0.32078639298599648        0.0000000000000000     
+   0.0000000000000000               29 -0.45259030483910934        0.0000000000000000     
+   0.0000000000000000               30 -0.53689929784588108        0.0000000000000000     
+   0.0000000000000000               31 -0.50380266976546439        0.0000000000000000     
+   0.0000000000000000               32 -0.31162970505730225        0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999998509883836E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999994784593482E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999994784593482E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999989569186987E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999989569186987E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999982863664350E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999982863664350E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999974668025571E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999974668025571E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999964982270650E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999964982270650E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999953806399589E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999953806399589E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999941140412385E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999941140412385E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999926984309040E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999926984309040E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999911338089553E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999911338089553E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999894201753925E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999894201753925E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999875575302155E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999875575302155E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999855458734244E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999855458734244E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999833852050191E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999833852050191E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999810755249996E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999810755249996E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999786168333660E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999786168333660E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999760091301182E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999760091301182E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999732524152563E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999732524152563E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999703466887802E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999703466887802E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999672919506899E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999672919506899E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999640882009855E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999640882009855E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999607354396669E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999607354396669E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999572336667342E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999572336667342E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999535828821873E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999535828821873E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999497830860262E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999497830860262E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999458342782510E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999458342782510E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999417364588616E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999417364588616E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999374896278581E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999374896278581E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999330937852404E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999330937852404E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999285489310086E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999285489310086E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999238550651626E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999238550651626E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999190121877024E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999190121877024E-002   0.0000000000000000     
+ # Number of lattice sites:                   32
+ # Number of particles:                        1
+ # Number of states Bosonic states            32
+
+
+ # Hubbard parameters (t,u):   9.9999140202986281E-002   0.0000000000000000     

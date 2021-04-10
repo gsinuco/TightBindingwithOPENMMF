@@ -6,6 +6,6 @@ if [ $? -ne 0 ]; then
   exit
 fi
 #
-mv rkf45.o ~/lib/rkf45.o
+#mv rkf45.o ~/lib/rkf45.o
 #
 echo "Normal end of execution."

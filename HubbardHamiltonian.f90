@@ -1,3 +1,112 @@
+
+
+SUBROUTINE Inhomogeneous_Tunneling_B(D_BARE,N_SITES,N_BODIES,STATE,H_J,INFO)
+   
+  USE CREATIONDESTRUCTION  
+  IMPLICIT NONE    
+  INTEGER,                               INTENT(IN)    :: D_BARE,N_SITES,N_BODIES
+  INTEGER,    DIMENSION(D_BARE,N_SITES), INTENT(IN)    :: STATE
+  COMPLEX*16, DIMENSION(D_BARE,D_BARE),  INTENT(OUT)   :: H_J
+  INTEGER,                               INTENT(INOUT) :: INFO
+
+  INTEGER, DIMENSION(N_SITES) :: NEW_STATE,STATE_J,STATE_I
+    
+  DOUBLE PRECISION :: EPSILON_J,DELTA_J,J_REN,K_J
+
+  INTEGER :: N,I_,J_,k_ ,SITE
+  N = D_BARE
+
+    
+!!$!  write(*,*) D_bare,N_sites
+!!$  H_J = 0
+!!$  J_=1
+!!$  K_=1
+!!$
+!!$  DO J_=2,D_BARE-1
+!!$     SITE = k_ - (N_SITES-1)/2
+!!$     CALL TRAP_EFFECTS(SITE,EPSILON_J,DELTA_J,J_REN,K_J,INFO)
+!!$     H_J(J_,J_+1) = DELTA_J
+!!$     H_J(J_,J_-1) = DELTA_J
+!!$  END DO
+!!$  CALL TRAP_EFFECTS(1,EPSILON_J,DELTA_J,J_REN,K_J,INFO)
+!!$  H_J(1,2)      = DELTA_J
+!!$  H_J(1,D_BARE) = DELTA_J
+!!$  CALL TRAP_EFFECTS(D_BARE,EPSILON_J,DELTA_J,J_REN,K_J,INFO)
+!!$  H_J(D_BARE,D_BARE-1) = DELTA_J
+!!$  H_J(D_BARE,1)        = DELTA_J
+  
+
+  DO k_=1,N_SITES-1 ! loop though all sites
+     SITE = k_ - (N_SITES-1)/2
+     CALL TRAP_EFFECTS(SITE,EPSILON_J,DELTA_J,J_REN,K_J,INFO)
+     DO J_=1,N      ! loop through all states
+        DO I_=J_+1,N ! and evaluate the forward tunneling matrix
+           !WRITE(*,*) K_,J_,I_,STATE(J_,:) 
+            !WRITE(*,*) STATE(I_,:) 
+           STATE_J = STATE(J_,:) 
+            STATE_I = STATE(I_,:) 
+            NEW_STATE = TUNNELING_(k_,STATE_J)
+            !write(*,*) NEW_STATE,dot_product((NEW_STATE-STATE_I),(NEW_STATE-STATE_I))
+            IF(dot_product((NEW_STATE-STATE_I),(NEW_STATE-STATE_I)).EQ.0) THEN
+               !WRITE(*,*) K_J(k_,J_,I_)
+                H_J(I_,J_) = SQRT(1.0*STATE_J(k_)*(STATE_J(k_+1)+1))*DELTA_J
+                H_J(J_,I_) = SQRT(1.0*STATE_J(k_)*(STATE_J(k_+1)+1))*DELTA_J
+            END IF           
+        END DO
+     END DO
+
+     DO J_=1,N
+         STATE_J = STATE(J_,:) 
+         STATE_I = STATE(J_,:) 
+         NEW_STATE = TUNNELING_(k_,STATE_J)
+         IF(dot_product((NEW_STATE-STATE_I),(NEW_STATE-STATE_I)).EQ.0) THEN
+            H_J(J_,J_) = SQRT(1.0*STATE_J(k_)*(STATE_J(k_+1)+1))*DELTA_J
+         END IF           
+     END DO
+  END DO
+
+  !PERIODIC BOUNDARY CONDITIONS
+  H_J(N_SITES,1) = H_J(1,2)
+  H_J(1,N_SITES) = H_J(1,2)
+
+END SUBROUTINE Inhomogeneous_Tunneling_B
+
+SUBROUTINE Inhomogeneous_EnergyShift_B(D_BARE,N_SITES,N_BODIES,STATE,H_J,INFO)
+   
+  USE CREATIONDESTRUCTION  
+  IMPLICIT NONE    
+  INTEGER,                               INTENT(IN)    :: D_BARE,N_SITES,N_BODIES
+  INTEGER,    DIMENSION(D_BARE,N_SITES), INTENT(IN)    :: STATE
+  COMPLEX*16, DIMENSION(D_BARE,D_BARE),  INTENT(OUT)   :: H_J
+  INTEGER,                               INTENT(INOUT) :: INFO
+
+  INTEGER, DIMENSION(N_SITES) :: NEW_STATE,STATE_J,STATE_I
+    
+  DOUBLE PRECISION :: EPSILON_J,DELTA_J,J_REN,K_J
+
+  INTEGER :: N,I_,J_,k_,site 
+  N = D_BARE
+
+    
+!  write(*,*) D_bare,N_sites
+  H_J = 0
+  J_=1
+  K_=1
+  
+  DO k_=1,N_SITES-1 ! loop though all sites     
+     SITE = k_ - (N_SITES-1)/2
+     CALL TRAP_EFFECTS(SITE,EPSILON_J,DELTA_J,J_REN,K_J,INFO)
+     H_J(k_,k_) = EPSILON_J
+  END DO
+
+  !PERIODIC BOUNDARY CONDITIONS
+  !H_J(N_SITES,1) = H_J(N_SITES,N_SITES)
+  !H_J(1,N_SITES) = H_J(1,1)
+
+END SUBROUTINE Inhomogeneous_EnergyShift_B
+
+
+
 SUBROUTINE Tunneling_B(D_BARE,N_SITES,N_BODIES,STATE,H_J,INFO)
    
   USE CREATIONDESTRUCTION
@@ -17,14 +126,14 @@ SUBROUTINE Tunneling_B(D_BARE,N_SITES,N_BODIES,STATE,H_J,INFO)
   J_=1
   K_=1
   DO k_=1,N_SITES-1 ! loop though all sites
-     DO J_=1,N
-        DO I_=J_+1,N
+     DO J_=1,N      ! loop through all states
+        DO I_=J_+1,N ! and evaluate the forward tunneling matrix
            !WRITE(*,*) K_,J_,I_,STATE(J_,:) 
             !WRITE(*,*) STATE(I_,:) 
             STATE_J = STATE(J_,:) 
             STATE_I = STATE(I_,:) 
             NEW_STATE = TUNNELING_(k_,STATE_J)
-            !write(*,*) NEW_STATE,dot_product((NEW_STATE-STATE_I),(NEW_STATE-STATE_I))
+!            write(*,*) NEW_STATE,dot_product((NEW_STATE-STATE_I),(NEW_STATE-STATE_I))
             IF(dot_product((NEW_STATE-STATE_I),(NEW_STATE-STATE_I)).EQ.0) THEN
                 H_J(I_,J_) = SQRT(1.0*STATE_J(k_)*(STATE_J(k_+1)+1))
                 H_J(J_,I_) = SQRT(1.0*STATE_J(k_)*(STATE_J(k_+1)+1))
@@ -43,10 +152,30 @@ SUBROUTINE Tunneling_B(D_BARE,N_SITES,N_BODIES,STATE,H_J,INFO)
   END DO
 
   !PERIODIC BOUNDARY CONDITIONS
-  H_J(N_SITES,1) = H_J(1,2)
+  H_J(N_SITES,1) = H_J(N_SITES,N_SITES-1)
   H_J(1,N_SITES) = H_J(1,2)
 
 END SUBROUTINE Tunneling_B
+
+SUBROUTINE Onsite_meanfield_B(D_BARE,PSI,H_U,INFO)
+
+    USE CREATIONDESTRUCTION
+  
+    IMPLICIT NONE    
+    INTEGER,                               INTENT(IN)    :: D_BARE
+    COMPLEX*16, DIMENSION(D_BARE),         INTENT(IN)    :: PSI
+    COMPLEX*16, DIMENSION(D_BARE,D_BARE),  INTENT(OUT)   :: H_U
+    INTEGER,                               INTENT(INOUT) :: INFO
+
+    INTEGER :: N,I_,J_,k_ 
+    N = D_BARE
+
+    H_U = 0
+    DO J_=1,N
+       H_U(J_,J_) = ABS(PSI(J_))**2
+    END DO
+
+END SUBROUTINE Onsite_meanfield_B
 
 SUBROUTINE Onsite_twobody_B(D_BARE,N_SITES,N_BODIES,STATE,H_U,INFO)
 
@@ -209,7 +338,7 @@ SUBROUTINE GET_MOMENTUM(N,PSI,MOMENTUM,INFO)
   IF(INFO.EQ.0) THEN
      DO i=1,SIZE(MOMENTUM,1)
         PSI_RATIO   = PSI(1,i)/psi(2,i)
-        MOMENTUM(i) = aimag(PSI_RATIO) !ATAN(AIMAG(PSI_RATIO)/REAL(PSI_RATIO))
+        MOMENTUM(i) = ATAN(AIMAG(PSI_RATIO)/REAL(PSI_RATIO))
      END DO
   ELSE
      WRITE(*,*) "INFO != 0"   
